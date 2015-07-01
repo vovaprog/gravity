@@ -2,17 +2,18 @@ package gravity;
 
 import java.io.*;
 import java.util.*;
+import org.apache.commons.io.FilenameUtils;
 
 public class ControllerSimple extends Controller{    
         
-    protected ScriptManager scriptManager;
+    protected ScriptManagerFolder scriptManager;
     
 	protected double savePositionToHistoryInterval = 5 * getStepTimeBorder();
     protected double runStepScriptsInterval = 5 * getStepTimeBorder();    
     
     public ControllerSimple() throws IOException
     {    	
-        model = new ModelSimple();
+        
         
         double r = 440000000;
         
@@ -20,6 +21,34 @@ public class ControllerSimple extends Controller{
                 
         scriptManager = new ScriptManagerFolder();
     }    
+    
+    public String[] getModelNames()
+    {
+        String scriptFolderName="./scripts";
+        
+        ArrayList<String> folderNames=new ArrayList<String>();
+        ArrayList<String> fileNames=new ArrayList<String>();
+        
+        Utils.getFolderContents(scriptFolderName,folderNames,fileNames);
+        
+        String[] modelNames = (String[])folderNames.toArray(new String[folderNames.size()]);
+        
+        for(int i=0;i<modelNames.length;i++)
+        {
+            modelNames[i]=FilenameUtils.getName(modelNames[i]);   
+        }
+        
+        return modelNames;
+    }
+    
+    public void createModel(String ModelName) throws Exception
+    {
+        model = new ModelSimple();
+        
+        scriptManager.loadScriptsFromFolder("./scripts/"+ModelName);
+        
+        scriptManager.runCreateScripts(createScriptParameters());
+    }
     
     protected Map<String,Object> createScriptParameters()
     {

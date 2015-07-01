@@ -12,29 +12,53 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 
 public class MainForm extends javax.swing.JFrame {
-	
+
+    private javax.swing.JButton buttonStart;
+    private javax.swing.JLabel labelSelectModel;
+    private javax.swing.JComboBox selectModel;
+    //private javax.swing.JPanel spacePanel;	
+    
 	private Timer modelStepTimer;
 	
     private Controller controller;
+    
+    private boolean isStarted=false; 
     
     public MainForm() throws Exception {
         initComponents();                
         
         initKeyboard();            
         
-        initController();
+  //      initController();
         
-        modelStepTimer = new Timer(1000 / 30, spacePanel);
+        controller = new ControllerSimple();
         
-        modelStepTimer.start();    
+        String[] modelNames = controller.getModelNames();
+        
+        for(String modelName : modelNames)
+        {
+            selectModel.addItem(modelName);    
+        }
+        
+/*        modelStepTimer = new Timer(1000 / 30, spacePanel);
+        
+        modelStepTimer.start();*/
+        
     }
 
     private void initController() throws Exception
     {
-        controller = new ControllerSimple();
+/*        controller = new ControllerSimple();
         
-        controller.createModel();
-        controller.initModel();
+/*        String[] modelNames = controller.getModelNames();
+        
+        for(String modelName : modelNames)
+        {
+            System.out.println(modelName);    
+        }
+        
+        controller.createModel(modelNames[0]);
+        controller.initModel();*/
     }
     
     private void initKeyboard()
@@ -69,7 +93,7 @@ public class MainForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")                          
     private void initComponents() {
 
-        spacePanel = new SpaceViewPanel();
+/*        spacePanel = new SpaceViewPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 600));
@@ -88,9 +112,98 @@ public class MainForm extends javax.swing.JFrame {
 
         getContentPane().add(spacePanel);
 
+        pack();*/
+        
+        spacePanel = new SpaceViewPanel();
+        
+
+        labelSelectModel = new javax.swing.JLabel();
+        selectModel = new javax.swing.JComboBox();
+        buttonStart = new javax.swing.JButton();
+        
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
+
+        labelSelectModel.setText("model:");
+
+        selectModel.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+        selectModel.setName("selectModel"); // NOI18N
+
+        buttonStart.setText("start");
+        buttonStart.setName("buttonStart"); // NOI18N
+        buttonStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStartActionPerformed(evt);
+            }
+        });
+
+        spacePanel.setName("spacePanel"); // NOI18N
+
+        javax.swing.GroupLayout spacePanelLayout = new javax.swing.GroupLayout(spacePanel);
+        spacePanel.setLayout(spacePanelLayout);
+        spacePanelLayout.setHorizontalGroup(
+            spacePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        spacePanelLayout.setVerticalGroup(
+            spacePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(spacePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelSelectModel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(selectModel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonStart)
+                        .addGap(0, 96, Short.MAX_VALUE))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSelectModel)
+                    .addComponent(selectModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonStart))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spacePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         pack();
+
     }           
 
+    private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        try{
+            //initController();
+
+            controller.createModel(selectModel.getSelectedItem().toString());
+            controller.initModel();
+            
+            
+            modelStepTimer = new Timer(1000 / 30, spacePanel);
+            
+            modelStepTimer.start();
+            
+            isStarted=true;
+        }catch(Exception ex){
+            System.out.println(ex);   
+        }
+    }                                               
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -132,7 +245,10 @@ public class MainForm extends javax.swing.JFrame {
 
             super.paintComponent(g);
             
-            controller.getView().paint(controller.getModel(), g, getWidth(), getHeight());
+            if(isStarted)
+            {
+                controller.getView().paint(controller.getModel(), g, getWidth(), getHeight());
+            }
         }
 
         public void actionPerformed(ActionEvent e)

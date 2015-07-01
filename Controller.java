@@ -18,6 +18,9 @@ public abstract class Controller{
         view = argView;
     }
     
+    public abstract String[] getModelNames(); 
+    public abstract void createModel(String ModelName) throws Exception;    
+    
     public Model getModel()
     {
         return model;
@@ -28,7 +31,7 @@ public abstract class Controller{
         return view;   
     }        
     
-    public abstract void createModel() throws Exception;
+    
     public abstract void initModel() throws Exception;
     protected abstract void timeStep(double time, int numberOfSteps) throws Exception;
     

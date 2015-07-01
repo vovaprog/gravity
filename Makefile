@@ -45,7 +45,7 @@ $(ScriptHostRhino): ScriptHostRhino.java
 	javac -cp "$(Output)" -d "$(Output)" ScriptHostRhino.java
 
 $(ControllerSimple): ControllerSimple.java
-	javac -cp "$(Output)" -d "$(Output)" ControllerSimple.java
+	javac -cp "$(Output)${PATHSEP}./lib/commons-io-2.4.jar" -d "$(Output)" ControllerSimple.java
 
 $(Spaceship): Spaceship.java
 	javac -cp "$(Output)" -d "$(Output)" Spaceship.java

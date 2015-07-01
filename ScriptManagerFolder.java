@@ -7,14 +7,14 @@ public class ScriptManagerFolder extends ScriptManager{
 
     public ScriptManagerFolder() throws IOException
     {
-        scripts=new ArrayList<ScriptInfo>();
         
-        loadScriptsFromDefaultFolder();
+        
+        //loadScriptsFromDefaultFolder();
     }
     
-    protected void loadScriptsFromDefaultFolder() throws IOException
+    protected void loadScriptsFromFolder(String folderName) throws IOException
     {
-        String scriptFolderName="./scripts";
+        /*String scriptFolderName="./scripts";
         
         ArrayList<String> folderNames=new ArrayList<String>();
         ArrayList<String> fileNames=new ArrayList<String>();
@@ -35,9 +35,15 @@ public class ScriptManagerFolder extends ScriptManager{
         if(runFolderName == null)
         {
             throw new IOException("script folder not found!");    
-        }
-                
-        Utils.getFolderContents(runFolderName,folderNames,fileNames);
+        }*/
+        
+        
+        scripts=new ArrayList<ScriptInfo>();
+
+        ArrayList<String> folderNames=new ArrayList<String>();
+        ArrayList<String> fileNames=new ArrayList<String>();        
+        
+        Utils.getFolderContents(folderName,folderNames,fileNames);
         
         for(String fileName : fileNames)
         {           
