@@ -5,17 +5,24 @@ public abstract class Controller{
     protected Model model;
     protected View view;    
     
-    protected int numberOfSteps=1;
-    protected double stepTime=getStepTimeBorder();
+    protected int numberOfSteps;
+    protected double stepTime;
         
-    protected Controller()
+    protected Controller() throws Exception
     {
+        reset();
     }
     
-    public Controller(Model argModel, View argView)
+    /*public Controller(Model argModel, View argView)
     {
         model = argModel;
         view = argView;
+    }*/
+    
+    protected void reset() throws Exception
+    {
+        numberOfSteps=1;
+        stepTime=getStepTimeBorder();
     }
     
     public abstract String[] getModelNames(); 

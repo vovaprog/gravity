@@ -8,19 +8,27 @@ public class ControllerSimple extends Controller{
         
     protected ScriptManagerFolder scriptManager;
     
-	protected double savePositionToHistoryInterval = 5 * getStepTimeBorder();
-    protected double runStepScriptsInterval = 5 * getStepTimeBorder();    
+	protected double savePositionToHistoryInterval;
+    protected double runStepScriptsInterval;    
     
-    public ControllerSimple() throws IOException
-    {    	
+    public ControllerSimple() throws Exception
+    {    	        
+        reset();
+    }    
+    
+    protected void reset() throws Exception
+    {
+        super.reset();
         
+        savePositionToHistoryInterval = 5 * getStepTimeBorder();
+        runStepScriptsInterval = 5 * getStepTimeBorder();
         
         double r = 440000000;
         
         view = new View2d(-r, r);
                 
         scriptManager = new ScriptManagerFolder();
-    }    
+    }
     
     public String[] getModelNames()
     {
@@ -43,6 +51,8 @@ public class ControllerSimple extends Controller{
     
     public void createModel(String ModelName) throws Exception
     {
+        reset();
+        
         model = new ModelSimple();
         
         scriptManager.loadScriptsFromFolder("./scripts/"+ModelName);
