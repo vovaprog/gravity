@@ -38,9 +38,6 @@ all: ./build $(Vector) $(Body) $(Spaceship) $(Model) $(Utils)  $(ModelSimple)  $
 
 $(Body): Body.java
 	javac -cp "$(Output)" -d "$(Output)" Body.java
-
-$(SimpleProfiler): SimpleProfiler.java
-	javac -cp "$(Output)" -d "$(Output)" SimpleProfiler.java	
 	
 $(Controller): Controller.java
 	javac -cp "$(Output)" -d "$(Output)" Controller.java
