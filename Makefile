@@ -1,8 +1,10 @@
 
 ifeq ($(OS),Windows_NT)
     PATHSEP=";"
+    FILESEP=\\
 else
     PATHSEP=":"
+    FILESEP=/
 endif
 
 Output=./build
@@ -32,7 +34,7 @@ all: ./build $(Vector) $(Body) $(Spaceship) $(Model) $(Utils)  $(ModelSimple)  $
     
 
 ./build:
-	mkdir ./build
+	mkdir .${FILESEP}build
 
 $(Body): Body.java
 	javac -cp "$(Output)" -d "$(Output)" Body.java
