@@ -27,10 +27,12 @@ Utils=$(Outpackage)/Utils.class
 ScriptHostJavaxScript=$(Outpackage)/ScriptHostJavaxScript.class
 MainForm=$(Outpackage)/MainForm.class
 
-all: $(Vector) $(Body) $(Spaceship) $(Model) $(Utils)  $(ModelSimple)  $(View) $(View2d) $(ScriptHost) $(ScriptHostJavaxScript) $(ScriptInfo) $(ScriptManager) $(ScriptManagerFolder) \
+all: ./build $(Vector) $(Body) $(Spaceship) $(Model) $(Utils)  $(ModelSimple)  $(View) $(View2d) $(ScriptHost) $(ScriptHostJavaxScript) $(ScriptInfo) $(ScriptManager) $(ScriptManagerFolder) \
     $(Controller) $(ControllerSimple) $(ModelEarthMoon) $(MainForm) 
     
 
+./build:
+	mkdir ./build
 
 $(Body): Body.java
 	javac -cp "$(Output)" -d "$(Output)" Body.java
