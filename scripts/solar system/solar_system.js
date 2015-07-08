@@ -39,7 +39,16 @@ view.setWorldSize(-500000000,500000000);
     earth.setColor(Packages.java.awt.Color.CYAN);
     earth.setName("earth");    
     model.addBody(earth);    
-    
+
+    var ceres = new Packages.gravity.Body();
+    ceres.setMass(9.39E20);
+    ceres.setRadius(469E3);
+    ceres.setPosition(new Packages.gravity.Vector(0,413774500E3,0));
+    ceres.setVelocity(new Packages.gravity.Vector(first_space_speed(sun.getMass(),413774500E3),0,0));
+    ceres.setColor(Packages.java.awt.Color.WHITE);
+    ceres.setName("ceres");    
+    model.addBody(ceres);    
+
     var mars = new Packages.gravity.Body();
     mars.setMass(0.642E24);
     mars.setRadius(3396E3);
@@ -57,10 +66,36 @@ view.setWorldSize(-500000000,500000000);
     jupiter.setColor(Packages.java.awt.Color.RED);
     jupiter.setName("jupiter");    
     model.addBody(jupiter);        
+
+    var saturn = new Packages.gravity.Body();
+    saturn.setMass(568E24);
+    saturn.setRadius(60268E3);
+    saturn.setPosition(new Packages.gravity.Vector(0,1433.5E9,0));
+    saturn.setVelocity(new Packages.gravity.Vector(first_space_speed(sun.getMass(),1433.5E9),0,0));
+    saturn.setColor(Packages.java.awt.Color.YELLOW);
+    saturn.setName("saturn");    
+    model.addBody(saturn);        
     
-    var worldSize = distance(sun, jupiter) * 1.3;
+    var uranus = new Packages.gravity.Body();
+    uranus.setMass(86.8E24);
+    uranus.setRadius(25559E3);
+    uranus.setPosition(new Packages.gravity.Vector(0,2872.5E9,0));
+    uranus.setVelocity(new Packages.gravity.Vector(first_space_speed(sun.getMass(),2872.5E9),0,0));
+    uranus.setColor(Packages.java.awt.Color.GREEN);
+    uranus.setName("uranus");    
+    model.addBody(uranus);        
+    
+    var neptune = new Packages.gravity.Body();
+    neptune.setMass(102E24);
+    neptune.setRadius(24764E3);
+    neptune.setPosition(new Packages.gravity.Vector(0,4495.1E9,0));
+    neptune.setVelocity(new Packages.gravity.Vector(first_space_speed(sun.getMass(),4495.1E9),0,0));
+    neptune.setColor(Packages.java.awt.Color.BLUE);
+    neptune.setName("neptune");    
+    model.addBody(neptune);        
+    
+    var worldSize = distance(sun, neptune) * 1.2;
     view.setWorldSize(-worldSize,worldSize);
 }
 
-[init]
 
