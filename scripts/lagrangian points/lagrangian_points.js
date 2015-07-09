@@ -1,8 +1,6 @@
 [global]
 [create]
 
-view.setWorldSize(-500000000,500000000);
-
 [init]
 
 {
@@ -13,6 +11,8 @@ view.setWorldSize(-500000000,500000000);
     var centerOfMass = earth_moon_distance * (moon.getMass() / earth.getMass());    
     println("earth-moon center of mass = "+parseInt(centerOfMass/1000));
     
+    
+    view.setWorldSize(-earth_moon_distance * 2.0 * 1.2,earth_moon_distance * 2.0 * 1.2);
     
     
     var alfa = moon.getMass() / (earth.getMass() + moon.getMass());

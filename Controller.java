@@ -7,18 +7,14 @@ public abstract class Controller{
     
     protected int numberOfSteps;
     protected double stepTime;
-        
+
+    protected double savePositionToHistoryInterval;
+    
     protected Controller() throws Exception
     {
         reset();
     }
-    
-    /*public Controller(Model argModel, View argView)
-    {
-        model = argModel;
-        view = argView;
-    }*/
-    
+        
     protected void reset() throws Exception
     {
         numberOfSteps=1;
@@ -88,6 +84,16 @@ public abstract class Controller{
     public void timeStep() throws Exception
     {
         timeStep(stepTime, numberOfSteps);
+    }
+    
+    public double getSavePositionToHistoryInterval()
+    {
+        return savePositionToHistoryInterval;
+    }
+    
+    public void setSavePositionToHistoryInterval(double interval)
+    {
+        savePositionToHistoryInterval = interval;    
     }
 }
 

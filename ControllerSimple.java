@@ -6,9 +6,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class ControllerSimple extends Controller{    
         
-    protected ScriptManagerFolder scriptManager;
-    
-	protected double savePositionToHistoryInterval;
+    protected ScriptManagerFolder scriptManager;  
     protected double runStepScriptsInterval;    
     
     public ControllerSimple() throws Exception
@@ -20,7 +18,7 @@ public class ControllerSimple extends Controller{
     {
         super.reset();
         
-        savePositionToHistoryInterval = 5 * getStepTimeBorder();
+        setSavePositionToHistoryInterval(5 * getStepTimeBorder());
         runStepScriptsInterval = 5 * getStepTimeBorder();
         
         double r = 440000000;
@@ -65,6 +63,7 @@ public class ControllerSimple extends Controller{
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("model",model);
         params.put("view",view);
+        params.put("controller",this);
         return params;
     }
     
@@ -99,13 +98,13 @@ public class ControllerSimple extends Controller{
             
             saveTime += time;
             
-            if(i==0 || saveTime>savePositionToHistoryInterval)
+            if(i==0 || saveTime>getSavePositionToHistoryInterval())
             {
             	model.savePositionToHistory();
             	
             	if(i>0)
             	{
-            		saveTime -= savePositionToHistoryInterval;
+            		saveTime -= getSavePositionToHistoryInterval();
             	}
             }        	
         	

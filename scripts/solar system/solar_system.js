@@ -94,8 +94,10 @@ view.setWorldSize(-500000000,500000000);
     neptune.setName("neptune");    
     model.addBody(neptune);        
     
-    var worldSize = distance(sun, neptune) * 1.2;
+    var worldSize = distance(sun, neptune) * 2.1;
     view.setWorldSize(-worldSize,worldSize);
+    
+    controller.setSavePositionToHistoryInterval(60 * 60 * 24);
 }
 
 
