@@ -40,15 +40,6 @@
     earth.setName("earth");    
     model.addBody(earth);    
 
-    var ceres = new Packages.gravity.Body();
-    ceres.setMass(9.39E20);
-    ceres.setRadius(469E3);
-    ceres.setPosition(new Packages.gravity.Vector(0,413774500E3,0));
-    ceres.setVelocity(new Packages.gravity.Vector(-first_space_speed(sun.getMass(),413774500E3),0,0));
-    ceres.setColor(Packages.java.awt.Color.WHITE);
-    ceres.setName("ceres");    
-    model.addBody(ceres);    
-
     var mars = new Packages.gravity.Body();
     mars.setMass(0.642E24);
     mars.setRadius(3396E3);
@@ -58,12 +49,21 @@
     mars.setName("mars");    
     model.addBody(mars);    
 
+    var ceres = new Packages.gravity.Body();
+    ceres.setMass(9.39E20);
+    ceres.setRadius(469E3);
+    ceres.setPosition(new Packages.gravity.Vector(0,413774500E3,0));
+    ceres.setVelocity(new Packages.gravity.Vector(-first_space_speed(sun.getMass(),413774500E3),0,0));
+    ceres.setColor(Packages.java.awt.Color.WHITE);
+    ceres.setName("ceres");    
+    model.addBody(ceres);    
+    
     var jupiter = new Packages.gravity.Body();
     jupiter.setMass(1898E24);
     jupiter.setRadius(71492E3);
     jupiter.setPosition(new Packages.gravity.Vector(0,778.6E9,0));
     jupiter.setVelocity(new Packages.gravity.Vector(-first_space_speed(sun.getMass(),778.6E9),0,0));
-    jupiter.setColor(Packages.java.awt.Color.RED);
+    jupiter.setColor(Packages.java.awt.Color.MAGENTA);
     jupiter.setName("jupiter");    
     model.addBody(jupiter);        
 
@@ -72,7 +72,7 @@
     saturn.setRadius(60268E3);
     saturn.setPosition(new Packages.gravity.Vector(0,1433.5E9,0));
     saturn.setVelocity(new Packages.gravity.Vector(-first_space_speed(sun.getMass(),1433.5E9),0,0));
-    saturn.setColor(Packages.java.awt.Color.YELLOW);
+    saturn.setColor(Packages.java.awt.Color.ORANGE);
     saturn.setName("saturn");    
     model.addBody(saturn);        
     

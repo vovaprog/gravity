@@ -44,6 +44,8 @@ public class ControllerSimple extends Controller{
             modelNames[i]=FilenameUtils.getName(modelNames[i]);   
         }
         
+        Arrays.sort(modelNames);
+        
         return modelNames;
     }
     
