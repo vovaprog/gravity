@@ -12,7 +12,7 @@
     println("earth-moon center of mass = "+parseInt(centerOfMass/1000));
     
     
-    view.setWorldSize(-earth_moon_distance * 2.0 * 1.2,earth_moon_distance * 2.0 * 1.2);
+    view.setWorldSize(-earth_moon_distance * 1.4,earth_moon_distance * 1.4);
     
     
     var alfa = moon.getMass() / (earth.getMass() + moon.getMass());
