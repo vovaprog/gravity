@@ -27,18 +27,14 @@ mkdir -p $output_folder/src/$program
 cp -r ./*.java ./Makefile ./release.sh $output_folder/src/$program
 
 mkdir -p $output_folder/src/$program/scripts
-cp -r ./scripts/moon_orbit_run $output_folder/src/$program/scripts
-cp -r ./scripts/lagrangian_points $output_folder/src/$program/scripts
+cp -r ./scripts/* $output_folder/src/$program/scripts
+#cp -r ./scripts/lagrangian_points $output_folder/src/$program/scripts
 
 cp -r ./lib $output_folder/src/$program
 
 mkdir -p $output_folder/src/$program/build
 
-cp ./build/start* $output_folder/src/$program/build
-
-mkdir -p $output_folder/src/$program/tools
-cp -r ./tools/GenerateMakefile.cs $output_folder/src/$program/tools
-cp -r ./tools/calc_first_space_speed.py $output_folder/src/$program/tools
+cp ./start.* ./GenerateMakefile.cs $output_folder/src/$program
 
 #=================================================================
 
@@ -50,10 +46,10 @@ cp -r ./build/gravity/*.class $output_folder/bin/$program
 cp -r ./lib $output_folder/bin
 
 mkdir -p $output_folder/bin/scripts
-cp -r ./scripts/moon_orbit_run $output_folder/bin/scripts
-cp -r ./scripts/lagrangian_points $output_folder/bin/scripts
+cp -r ./scripts/* $output_folder/bin/scripts
+#cp -r ./scripts/lagrangian_points $output_folder/bin/scripts
 
-cp ./build/start* $output_folder/bin
+cp ./start.* $output_folder/bin
 
 zip -r $zip_file_name_short $output_folder_short
 
