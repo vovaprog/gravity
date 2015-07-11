@@ -28,7 +28,6 @@ cp -r ./*.java ./Makefile ./release.sh $output_folder/src/$program
 
 mkdir -p $output_folder/src/$program/scripts
 cp -r ./scripts/* $output_folder/src/$program/scripts
-#cp -r ./scripts/lagrangian_points $output_folder/src/$program/scripts
 
 cp -r ./lib $output_folder/src/$program
 
@@ -47,7 +46,6 @@ cp -r ./lib $output_folder/bin
 
 mkdir -p $output_folder/bin/scripts
 cp -r ./scripts/* $output_folder/bin/scripts
-#cp -r ./scripts/lagrangian_points $output_folder/bin/scripts
 
 cp ./start.* $output_folder/bin
 
