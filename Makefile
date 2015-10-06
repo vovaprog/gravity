@@ -14,14 +14,17 @@ SRC = Vector.java Body.java Spaceship.java Model.java Utils.java ModelSimple.jav
 
 CLASSES = $(patsubst %.java,$(OUTPUT)/gravity/%.class,$(SRC))    
     
+.PHONY: all
 all: $(CLASSES) 
 
 $(OUTPUT)/gravity/%.class : %.java
 	javac -cp "$(OUTPUT)$(PATHSEP)./lib/commons-io-2.4.jar" -d "$(OUTPUT)" $<
 
+.PHONY: run	
 run: all
 	java -cp "$(OUTPUT)$(PATHSEP)./lib/commons-io-2.4.jar" gravity.MainForm
 
+.PHONY: clean
 clean:	
 	rm -r $(OUTPUT)/gravity
 
