@@ -167,6 +167,17 @@ public class MainForm extends javax.swing.JFrame {
         }
     }                                               
     
+    private static void printKeys()
+    {                       
+        System.out.println("=========== keyboard commands ===========");
+        System.out.println("up, down, left, right arrows: move view");
+        System.out.println("\"+\":                          zoom in");
+        System.out.println("\"-\":                          zoom out");
+        System.out.println("page up:                      time faster");
+        System.out.println("page down:                    time slower");
+        System.out.println("=========================================");        
+    }
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -185,6 +196,8 @@ public class MainForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        printKeys();
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try{
