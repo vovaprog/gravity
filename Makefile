@@ -1,4 +1,3 @@
-
 ifeq ($(OS),Windows_NT)
     PATHSEP=";"
     FILESEP=\\
@@ -7,91 +6,22 @@ else
     FILESEP=/
 endif
 
-Output=./build
-Outpackage=./build/gravity
+OUTPUT = build
 
-Body=$(Outpackage)/Body.class
-SimpleProfiler=$(Outpackage)/SimpleProfiler.class
-Controller=$(Outpackage)/Controller.class
-ScriptHostRhino=$(Outpackage)/ScriptHostRhino.class
-ControllerSimple=$(Outpackage)/ControllerSimple.class
-Spaceship=$(Outpackage)/Spaceship.class
-Vector=$(Outpackage)/Vector.class
-View=$(Outpackage)/View.class
-View2d=$(Outpackage)/View2d.class
-ModelSimple=$(Outpackage)/ModelSimple.class
-ScriptHost=$(Outpackage)/ScriptHost.class
-Model=$(Outpackage)/Model.class
-ScriptManagerFolder=$(Outpackage)/ScriptManagerFolder.class
-ScriptInfo=$(Outpackage)/ScriptInfo.class
-ScriptManager=$(Outpackage)/ScriptManager.class
-Utils=$(Outpackage)/Utils.class
-ScriptHostJavaxScript=$(Outpackage)/ScriptHostJavaxScript.class
-MainForm=$(Outpackage)/MainForm.class
+SRC = Vector.java Body.java Spaceship.java Model.java Utils.java ModelSimple.java \
+   View.java View2d.java ScriptHost.java ScriptHostJavaxScript.java ScriptInfo.java \
+   ScriptManager.java ScriptManagerFolder.java Controller.java ControllerSimple.java MainForm.java
 
-all: ./build $(Vector) $(Body) $(Spaceship) $(Model) $(Utils)  $(ModelSimple)  $(View) $(View2d) $(ScriptHost) $(ScriptHostJavaxScript) $(ScriptInfo) $(ScriptManager) $(ScriptManagerFolder) \
-    $(Controller) $(ControllerSimple) $(ModelEarthMoon) $(MainForm) 
+CLASSES = $(patsubst %.java,$(OUTPUT)/gravity/%.class,$(SRC))    
     
+all: $(CLASSES) 
 
-./build:
-	mkdir .${FILESEP}build
-
-$(Body): Body.java
-	javac -cp "$(Output)" -d "$(Output)" Body.java
-	
-$(Controller): Controller.java
-	javac -cp "$(Output)" -d "$(Output)" Controller.java
-
-$(ScriptHostRhino): ScriptHostRhino.java
-	javac -cp "$(Output)" -d "$(Output)" ScriptHostRhino.java
-
-$(ControllerSimple): ControllerSimple.java
-	javac -cp "$(Output)${PATHSEP}./lib/commons-io-2.4.jar" -d "$(Output)" ControllerSimple.java
-
-$(Spaceship): Spaceship.java
-	javac -cp "$(Output)" -d "$(Output)" Spaceship.java
-
-$(Vector): Vector.java
-	javac -cp "$(Output)" -d "$(Output)" Vector.java
-
-$(View): View.java
-	javac -cp "$(Output)" -d "$(Output)" View.java
-
-$(View2d): View2d.java
-	javac -cp "$(Output)" -d "$(Output)" View2d.java
-
-$(ModelSimple): ModelSimple.java
-	javac -cp "$(Output)" -d "$(Output)" ModelSimple.java
-
-$(ScriptHost): ScriptHost.java
-	javac -cp "$(Output)" -d "$(Output)" ScriptHost.java
-
-$(Model): Model.java
-	javac -cp "$(Output)" -d "$(Output)" Model.java
-
-$(ScriptManagerFolder): ScriptManagerFolder.java
-	javac -cp "$(Output)" -d "$(Output)" ScriptManagerFolder.java
-
-$(ScriptInfo): ScriptInfo.java
-	javac -cp "$(Output)${PATHSEP}./lib/commons-io-2.4.jar" -d "$(Output)" ScriptInfo.java
-
-$(ScriptManager): ScriptManager.java
-	javac -cp "$(Output)" -d "$(Output)" ScriptManager.java
-
-$(Utils): Utils.java
-	javac -cp "$(Output)" -d "$(Output)" Utils.java
-
-$(ScriptHostJavaxScript): ScriptHostJavaxScript.java
-	javac -cp "$(Output)" -d "$(Output)" ScriptHostJavaxScript.java
-
-$(MainForm): MainForm.java
-	javac -cp "$(Output)" -d "$(Output)" MainForm.java
-
+$(OUTPUT)/gravity/%.class : %.java
+	javac -cp "$(OUTPUT)$(PATHSEP)./lib/commons-io-2.4.jar" -d "$(OUTPUT)" $<
 
 run: all
-	java -cp "./build${PATHSEP}./lib/commons-io-2.4.jar" gravity.MainForm
+	java -cp "$(OUTPUT)$(PATHSEP)./lib/commons-io-2.4.jar" gravity.MainForm
 
 clean:	
-	rm -r ./build/gravity
-	
-	
+	rm -r $(OUTPUT)/gravity
+
