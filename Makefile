@@ -1,9 +1,11 @@
 ifeq ($(OS),Windows_NT)
     PATHSEP=";"
     FILESEP=\\
+    RM=rmdir /S /Q
 else
     PATHSEP=":"
     FILESEP=/
+    RM=rm -r
 endif
 
 OUTPUT = build
@@ -15,7 +17,10 @@ SRC = Vector.java Body.java Spaceship.java Model.java Utils.java ModelSimple.jav
 CLASSES = $(patsubst %.java,$(OUTPUT)/gravity/%.class,$(SRC))    
     
 .PHONY: all
-all: $(CLASSES) 
+all: $(OUTPUT) $(CLASSES) 
+
+$(OUTPUT):
+	mkdir $(OUTPUT)
 
 $(OUTPUT)/gravity/%.class : %.java
 	javac -cp "$(OUTPUT)$(PATHSEP)./lib/commons-io-2.4.jar" -d "$(OUTPUT)" $<
@@ -26,5 +31,5 @@ run: all
 
 .PHONY: clean
 clean:	
-	rm -r $(OUTPUT)/gravity
+	$(RM) $(OUTPUT)
 
