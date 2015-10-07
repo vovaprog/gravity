@@ -167,7 +167,7 @@ public class MainForm extends javax.swing.JFrame {
         }
     }                                               
     
-    private static void printKeys()
+    private static void printKeyboardCommands()
     {                       
         System.out.println("=========== keyboard commands ===========");
         System.out.println("up, down, left, right arrows: move view");
@@ -196,7 +196,7 @@ public class MainForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        printKeys();
+        printKeyboardCommands();
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
